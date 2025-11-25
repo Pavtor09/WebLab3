@@ -1,2 +1,2 @@
-rootProject.name = "JSFExample"
+rootProject.name = "Lab3"
 
