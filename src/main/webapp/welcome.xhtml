@@ -1,24 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-    <title>Приветствие</title>
-    <h:outputStylesheet name="welcome.css" library="css"/>
-</h:head>
-<h:body>
-    <div id="body">
-        <header>
-            Чайковский Никита Михайлович P3217 ВАР:3515
-        </header>
+<ui:composition template="resources/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">Моя страница</ui:define>
 
-        <p>Салют!</p>
-        <h:link value="Потыкать пример лектора" outcome="calculator"/>
-        <br/>
-        <div id='clock'>Тут будет текущее время</div>
-        <canvas height='480' width='480' id='myCanvas'></canvas>
-    </div>
-    <h:outputScript library="js" name="clock.js"/>
-</h:body>
-</html>
+    <ui:define name="head">
+        <h:outputStylesheet name="welcome.css" library="css"/>
+        <h:outputScript name="clock.js" library="js"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <div id="clock-container">
+            <b>
+            <h2>А время-то идёт...</h2>
+            <p id="clock">тут скоро будет время</p>
+            </b>
+        </div>
+    </ui:define>
+</ui:composition>

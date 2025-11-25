@@ -1,0 +1,33 @@
+<ui:composition template="resources/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">Моя страница</ui:define>
+
+    <ui:define name="head">
+        <!-- <h:outputStylesheet name="welcome.css" library="css"/>
+        <h:outputScript name="clock.js" library="js"/> -->
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="container">
+  <div class="left-column">
+    <!-- Интерфейс для ввода координат -->
+    <form>
+      <label for="x">X:</label><input id="x" name="x" type="number"/><br/>
+      <label for="y">Y:</label><input id="y" name="y" type="number"/><br/>
+      <button type="submit">Проверить</button>
+    </form>
+    <!-- Таблица с результатами -->
+    <table>
+      <tr><th>X</th><th>Y</th><th>Результат</th></tr>
+      <tr><td>1</td><td>2</td><td>Точка в области</td></tr>
+    </table>
+  </div>
+  <div class="right-column">
+    <!-- Место для графика (например, canvas или SVG) -->
+    <canvas id="chart"></canvas>
+  </div>
+</div>
+    </ui:define>
+</ui:composition>
