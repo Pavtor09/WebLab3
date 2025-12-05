@@ -3,14 +3,16 @@ package service;
 import controller.ErrorBean;
 import controller.ResultBean;
 import repository.DatabaseService;
+import repository.RepositoryInterface;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.PUT;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
+
 //Добавить интерфейс
 //Переделать в бины
 @ApplicationScoped
@@ -26,7 +28,7 @@ public class Service implements Serializable,ServiceInterface {
     @Inject
     private ErrorBean errorBean;
     @Inject
-    private DatabaseService DbService;
+    private RepositoryInterface DbService;
 
     public void check(double x, String sy, double r,boolean doRangeValidation)
     {
@@ -47,7 +49,7 @@ public class Service implements Serializable,ServiceInterface {
                 LocalTime now = LocalTime.now();
                 ResultObject result = new ResultObject(x,y,r,hit,String.format("%02d:%02d", now.getHour(), now.getMinute()),(System.nanoTime()-startTime)/1000000);
                 resultBean.add(result);
-                DbService.saveToDatabase(result);
+                DbService.save(result);
 
             }
 
@@ -55,11 +57,11 @@ public class Service implements Serializable,ServiceInterface {
     }
     public void load()
     {
-        resultBean.setResults(DbService.loadFromDatabase());
+        resultBean.setResults((List<ResultObject>) DbService.load());
 //        System.out.println("inLoad");
     }
     public void clear() throws SQLException {
         resultBean.setResults(new ArrayList<ResultObject>());
-        DbService.clearDatabase();
+        DbService.clear();
     }
 }

@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 @ApplicationScoped
-public class DatabaseService implements Serializable {
+public class DatabaseService implements Serializable,RepositoryInterface {
     private final String url = "jdbc:postgresql://localhost:5432/postgres";
     private final String user = "postgres";
     private final String password = "postgres";
@@ -19,8 +19,8 @@ public class DatabaseService implements Serializable {
     private final String loadQuery = "SELECT x, y, r, hit, reqTime, exTime FROM results";
     private final String clearQuery = "Delete from results;";
 
-    public void saveToDatabase(ResultObject result) {
-
+    public void save(Object resultObj) {
+        ResultObject result = (ResultObject) resultObj;
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = conn.prepareStatement(saveQuery)) {
 
@@ -38,7 +38,7 @@ public class DatabaseService implements Serializable {
         }
     }
 
-    public List<ResultObject> loadFromDatabase() {
+    public Object load() {
 
         List<ResultObject> results = new ArrayList<>();
 
@@ -65,7 +65,7 @@ public class DatabaseService implements Serializable {
 
     }
 
-    public void clearDatabase() throws SQLException {
+    public void clear() {
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = conn.prepareStatement(clearQuery)) {
             stmt.executeUpdate();
