@@ -145,7 +145,7 @@
 
         <h:commandButton id="send" value="Отправить">
             <f:ajax execute="@this"
-                    listener="#{manager.check(point.x, point.y, point.r)}"
+                    listener="#{manager.check(point)}"
                     render="error-box result-table points-script"
                     onevent="drawDots"/>
         </h:commandButton>

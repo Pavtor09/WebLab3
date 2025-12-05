@@ -1,6 +1,7 @@
 package controller;
 
 import service.Service;
+import service.ServiceInterface;
 
 
 import javax.annotation.PostConstruct;
@@ -16,26 +17,28 @@ import java.sql.SQLException;
 @ApplicationScoped
 public class ManageBean implements Serializable {
     private boolean fromGraphic;
-    private Service service;
+
     private boolean doRangeValidation;
 
     @Inject
     private ErrorBean error;
     @Inject
     private ResultBean result;
+    @Inject
+    private ServiceInterface service;
 
-    @PostConstruct
-    public void init() {
+//    @PostConstruct
+//    public void init() {
+//
+//        service = new Service();
+//    }
 
-        service = new Service(error, result);
+
+    public void check(PointBean point) {
+        service.check(point.getX(), point.getY(), point.getR(), doRangeValidation);
     }
 
-    //заменить на DTO объект
-    public void check(double x, String y, double r) {
-        service.check(x, y, r, doRangeValidation);
-    }
-
-    public void load() {
+    public void load() throws SQLException {
         service.load();
     }
 

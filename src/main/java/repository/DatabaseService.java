@@ -2,11 +2,13 @@ package repository;
 
 import service.ResultObject;
 
+import javax.enterprise.context.ApplicationScoped;
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-public class DatabaseService {
+@ApplicationScoped
+public class DatabaseService implements Serializable {
     private final String url = "jdbc:postgresql://localhost:5432/postgres";
     private final String user = "postgres";
     private final String password = "postgres";

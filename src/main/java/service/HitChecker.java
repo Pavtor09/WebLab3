@@ -3,9 +3,12 @@ package service;
 import controller.ErrorBean;
 import controller.ResultBean;
 
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.time.LocalTime;
-
-public class HitChecker {
+@SessionScoped
+public class HitChecker implements Serializable {
 
     public boolean check(double x, double y, double r)
     {

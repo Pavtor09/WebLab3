@@ -4,26 +4,30 @@ import controller.ErrorBean;
 import controller.ResultBean;
 import repository.DatabaseService;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.PUT;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 //Добавить интерфейс
 //Переделать в бины
-public class Service {
-    Validator validator;
-    private boolean hit;
-    private final ResultBean resultBean;
-    private final HitChecker checker;
-    private DatabaseService DbService;
-    public Service(ErrorBean errorBean, ResultBean result)
-    {
-        validator = new Validator(errorBean);
-        this.resultBean = result;
-        checker = new HitChecker();
-        DbService = new DatabaseService();
+@ApplicationScoped
+public class Service implements Serializable,ServiceInterface {
 
-    }
+    private boolean hit;
+    @Inject
+    private ResultBean resultBean;
+    @Inject
+    private HitChecker checker;
+    @Inject
+    Validator validator;
+    @Inject
+    private ErrorBean errorBean;
+    @Inject
+    private DatabaseService DbService;
+
     public void check(double x, String sy, double r,boolean doRangeValidation)
     {
         long startTime = System.nanoTime();
@@ -52,7 +56,7 @@ public class Service {
     public void load()
     {
         resultBean.setResults(DbService.loadFromDatabase());
-        System.out.println("inLoad");
+//        System.out.println("inLoad");
     }
     public void clear() throws SQLException {
         resultBean.setResults(new ArrayList<ResultObject>());

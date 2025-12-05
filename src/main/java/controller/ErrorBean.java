@@ -4,7 +4,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
-@Named("errorBean")  // CDI аннотация - имя для EL выражений #{manageBean}
+@Named("errorBean")
 @SessionScoped
 public class ErrorBean implements Serializable {
     private String message;

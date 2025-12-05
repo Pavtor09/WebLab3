@@ -4,10 +4,10 @@ import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
-@Named("point")  // CDI аннотация - имя для EL выражений #{manageBean}
+@Named("point")
 @SessionScoped
 public class PointBean implements Serializable {
-    protected String x;
+    protected double x;
     private String y;
     private double R = 1;
     public PointBean()
@@ -18,7 +18,7 @@ public class PointBean implements Serializable {
         return R;
     }
 
-    public String getX() {
+    public double getX() {
         return x;
     }
 
@@ -30,9 +30,9 @@ public class PointBean implements Serializable {
         R = r;
     }
 
-    public void setX(String x) {
+    public void setX(double x) {
         this.x = x;
-        System.out.println("X установлен, ура победа");
+//        System.out.println("X установлен, ура победа");
     }
 
     public void setY(String y) {

@@ -2,12 +2,15 @@ package service;
 
 import controller.ErrorBean;
 
-public class Validator {
-    ErrorBean error;
-    public Validator(ErrorBean errorBean)
-    {
-    error = errorBean;
-    }
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import java.io.Serializable;
+
+@ApplicationScoped
+public class Validator implements Serializable {
+    @Inject
+    private ErrorBean error;
+
     public boolean isTypeValid(String y){
         try {
             Double.parseDouble(y);
