@@ -10,11 +10,12 @@ public class ErrorBean implements Serializable {
     private String message;
     private boolean show;
     private boolean shown;
+
     public String getMessage() {
         return message;
     }
-    public void setMessage(String message)
-    {
+
+    public void setMessage(String message) {
         this.message = message;
         show = true;
         shown = false;

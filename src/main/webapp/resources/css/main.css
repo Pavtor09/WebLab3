@@ -11,7 +11,7 @@
 .right-column{
   flex: 1;         /* график занимает столько места, сколько есть */
   min-width: 320px;
-  margin-top: 5vh;
+  margin-top: 10vh;
   height:70%;
   display: flex;
   align-items: center;
@@ -67,14 +67,12 @@
   padding: 16px;
 }
 
-/* Таблица внутри #result */
 #result table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-/* Заголовки таблицы */
 #result table th {
   
     padding: 12px;
@@ -84,7 +82,7 @@
     top: 0;
 }
 
-/* Ячейки таблицы */
+
 #result table td {
     padding: 10px;
     text-align: center;

@@ -61,12 +61,10 @@
         <h:inputHidden id="clickY" value="#{point.y}"/>
         <h:inputHidden id="setValidation" value="#{manager.doRangeValidation}"/>
 
-        <!-- Скрытая кнопка №1 - обработка клика по canvas -->
         <h:commandButton id="canvasClickBtn" style="display: none;">
             <f:ajax execute="clickX clickY setValidation"/>
         </h:commandButton>
 
-        <!-- Скрытая кнопка №2 - проверка точки -->
         <h:commandButton id="checkPointBtn" style="display: none;">
             <f:ajax listener="#{manager.check(point.clickX, point.clickY, point.clickR)}"
                     render="error-box points-script result-table"/>
@@ -77,9 +75,7 @@
             </p:outputPanel>
         </div>
 
-    <!-- Интерфейс для ввода координат -->
     <div id="inpt">
-        <!-- X: набор кнопок -->
          <h:outputLabel value="Изменение X:"/>
         <h:panelGroup layout="block" styleClass="x-buttons-row">
             <h:commandButton value="-4" styleClass="x-btn">
@@ -123,14 +119,12 @@
 
         <br/>
 
-        <!-- Y: текстовое поле -->
         <h:outputLabel value="Изменение Y:"/>
         <h:inputText id="y-input" value="#{point.y}" maxlength="5" placeholder="от -3 до 5">
             <f:ajax event="change" execute="@this" render="error-box" />
         </h:inputText>
         <br/>
 
-        <!-- R: dropdown -->
         <h:outputLabel value="Изменение R:"/>
         <h:selectOneMenu id="r-select" value="#{point.r}">
             <f:selectItem itemValue="1" itemLabel="1"/>
@@ -139,7 +133,7 @@
             <f:selectItem itemValue="4" itemLabel="4"/>
             <f:selectItem itemValue="5" itemLabel="5"/>
             <f:ajax event="change" execute="@this" render="error-box points-script" onevent="drawDots"/>
-            <!-- event="change" - срабатывает сразу при выборе значения -->
+
         </h:selectOneMenu>
         <br/>
 
@@ -150,12 +144,10 @@
                     onevent="drawDots"/>
         </h:commandButton>
       </div>
-    <!-- Таблица с результатами -->
+
+
+
     <div id="result">
-      <!-- <table>
-        <tr><th>X</th><th>Y</th><th>Результат</th></tr>
-        <tr><td>1</td><td>2</td><td>Точка в области</td></tr>
-      </table> -->
         <h:dataTable value="#{result.results}" var="item" id="result-table">
 
             <h:column>
@@ -189,9 +181,12 @@
             </h:column>
         </h:dataTable>
     </div>
+    <div class="clear-container">
         <h:commandButton id="clear" value="Очистить" action="#{manager.clear()}" >
             <f:ajax render="error-box result-table points-script" onevent="drawDots"/>
         </h:commandButton>
+    </div>
+    
     </h:form>
 
 </div>

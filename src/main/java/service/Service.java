@@ -13,10 +13,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//Добавить интерфейс
-//Переделать в бины
 @ApplicationScoped
-public class Service implements Serializable,ServiceInterface {
+public class Service implements Serializable, ServiceInterface {
 
     private boolean hit;
     @Inject
@@ -30,24 +28,20 @@ public class Service implements Serializable,ServiceInterface {
     @Inject
     private RepositoryInterface DbService;
 
-    public void check(double x, String sy, double r,boolean doRangeValidation)
-    {
+    public void check(double x, String sy, double r, boolean doRangeValidation) {
         long startTime = System.nanoTime();
-        if(validator.isTypeValid(sy))
-        {
+        if (validator.isTypeValid(sy)) {
 
             double y = Double.parseDouble(sy);
             boolean valid = true;
-            if (doRangeValidation)
-            {
-                valid = validator.isRangeValid(x,y,r);
+            if (doRangeValidation) {
+                valid = validator.isRangeValid(x, y, r);
             }
 
-            if (valid)
-            {
-                hit = checker.check(x,y,r);
+            if (valid) {
+                hit = checker.check(x, y, r);
                 LocalTime now = LocalTime.now();
-                ResultObject result = new ResultObject(x,y,r,hit,String.format("%02d:%02d", now.getHour(), now.getMinute()),(System.nanoTime()-startTime)/1000000);
+                ResultObject result = new ResultObject(x, y, r, hit, String.format("%02d:%02d", now.getHour(), now.getMinute()), (System.nanoTime() - startTime) / 1000000);
                 resultBean.add(result);
                 DbService.save(result);
 
@@ -55,11 +49,12 @@ public class Service implements Serializable,ServiceInterface {
 
         }
     }
-    public void load()
-    {
+
+    public void load() {
         resultBean.setResults((List<ResultObject>) DbService.load());
 //        System.out.println("inLoad");
     }
+
     public void clear() throws SQLException {
         resultBean.setResults(new ArrayList<ResultObject>());
         DbService.clear();

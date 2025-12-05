@@ -7,8 +7,8 @@ public class ResultObject {
     private boolean hit;
     private String currentTime;
     private long executionTime;
-    public ResultObject(double X, double Y, double R,boolean Hit, String CurrentTime, long ExecutionTime)
-    {
+
+    public ResultObject(double X, double Y, double R, boolean Hit, String CurrentTime, long ExecutionTime) {
         x = X;
         y = Y;
         r = R;
@@ -64,8 +64,8 @@ public class ResultObject {
     public void setExecutionTime(long executionTime) {
         this.executionTime = executionTime;
     }
-    public String getStringHit()
-    {
+
+    public String getStringHit() {
         return hit ? "true" : "false";
     }
 }

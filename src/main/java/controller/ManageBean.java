@@ -12,7 +12,7 @@ import javax.inject.Named;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-//управляет вызовами из методов из сервиса
+
 @Named("manager")
 @ApplicationScoped
 public class ManageBean implements Serializable {
@@ -26,12 +26,6 @@ public class ManageBean implements Serializable {
     private ResultBean result;
     @Inject
     private ServiceInterface service;
-
-//    @PostConstruct
-//    public void init() {
-//
-//        service = new Service();
-//    }
 
 
     public void check(PointBean point) {

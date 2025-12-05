@@ -7,8 +7,9 @@ import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @ApplicationScoped
-public class DatabaseService implements Serializable,RepositoryInterface {
+public class DatabaseService implements Serializable, RepositoryInterface {
     private final String url = "jdbc:postgresql://localhost:5432/postgres";
     private final String user = "postgres";
     private final String password = "postgres";
@@ -29,7 +30,7 @@ public class DatabaseService implements Serializable,RepositoryInterface {
             stmt.setDouble(3, result.getR());
             stmt.setBoolean(4, result.isHit());
             stmt.setString(5, result.getCurrentTime());
-            stmt.setLong(6, result.getExecutionTime()); // INTERVAL как строка
+            stmt.setLong(6, result.getExecutionTime());
 
             stmt.executeUpdate();
 
@@ -52,7 +53,7 @@ public class DatabaseService implements Serializable,RepositoryInterface {
                 double r = rs.getDouble("r");
                 boolean hit = rs.getBoolean("hit");
                 String reqTime = rs.getString("reqTime");
-                long exTime = rs.getLong("exTime"); // Assuming interval stored as string
+                long exTime = rs.getLong("exTime");
 
                 ResultObject qr = new ResultObject(x, y, r, hit, reqTime, exTime);
                 results.add(qr);
