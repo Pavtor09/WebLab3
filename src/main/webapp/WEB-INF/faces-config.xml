@@ -6,8 +6,26 @@
               version="2.0">
 
     <managed-bean>
-        <managed-bean-name>calculator</managed-bean-name>
-        <managed-bean-class>alfarius.goida.Calculator</managed-bean-class>
+        <managed-bean-name>point</managed-bean-name>
+        <managed-bean-class>controller.PointBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>errorBean</managed-bean-name>
+        <managed-bean-class>controller.ErrorBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>manager</managed-bean-name>
+        <managed-bean-class>controller.ManageBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>result</managed-bean-name>
+        <managed-bean-class>controller.ResultBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 

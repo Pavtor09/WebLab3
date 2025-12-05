@@ -1,7 +1,8 @@
 header {
     background-color:rgb(48, 48, 53);
     color: white;
-    font-size:10px;
+    font-size:12px;
+    font-family: 'Courier New', Courier, monospace;
 }
 body{
 margin: 0;

@@ -2,12 +2,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>Проверка попадания точки</title>
     <h:outputStylesheet name="templateStyle.css" library="css"/>
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <ui:insert name="head"/>
 </h:head>
 <h:body>
@@ -19,18 +20,18 @@
             <div id="info">
                 <p><strong>ФИО:</strong> Торопов Павел Кириллович</p>
                 <p><strong>Группа:</strong> P3219</p>
-                <p><strong>Вариант:</strong>8646</p>
+                <p><strong>Вариант:</strong> 8646</p>
             </div>
         </div>
     </header>
     <div id="body">
 
-        <ui:insert name="content"/>.
         <!--        Тут основной текст-->
     </div>
-
-
+        <ui:insert name="content"/>
 
 
 </h:body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<ui:insert name="scripts"/>
 </html>

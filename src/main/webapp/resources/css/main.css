@@ -1,0 +1,143 @@
+.container {
+  display: flex;
+  gap: 24px; /* расстояние между колонками */
+}
+.left-column {
+  flex: 1;          /* ширина — автоматически, занимает половину или больше */
+  min-width: 320px; /* ширина можно задать под форму/таблицу */
+
+
+}
+.right-column{
+  flex: 1;         /* график занимает столько места, сколько есть */
+  min-width: 320px;
+  margin-top: 5vh;
+  height:70%;
+  display: flex;
+  align-items: center;
+  margin-left: 5vh;
+  margin-right:10vh ;
+  justify-content: center;
+  background-color: rgb(245, 245, 245);
+  border: 2px solid #333;       /* сама граница */
+  border-radius: 12px;    
+  height: 50vh;      /* радиус скругления во всех углах */
+}
+.right-column canvas{
+    /* padding-top: 10vh;
+    padding-bottom: 10vh; */
+      width: 400px;   /* Должно совпадать с атрибутом width */
+      height: 400px;  /* Должно совпадать с атрибутом height */
+
+}
+#inpt{
+  margin-top:2vh;
+  margin-left:20vh;
+  line-height: 2;
+  background-color: rgb(245, 245, 245);
+  padding-left:10vh;
+  font-family: 'Courier New', Courier, monospace;
+
+  border: 2px solid #333;       /* сама граница */
+  border-radius: 12px;          /* радиус скругления во всех углах */
+  padding: 16px;
+  
+}
+
+.sendButton{
+  border-radius: 5px;
+  border-width: 2px;
+  background-color: rgb(255, 255, 255);
+  font-family: 'Courier New', Courier, monospace;
+  
+}
+#result {
+  font-size: small;
+  margin-top: 2vh;
+  height: 30vh;
+  margin-left: 20vh;
+  line-height: 2;
+  background-color: rgb(245, 245, 245);
+  padding-left: 10vh;
+  font-family: 'Courier New', Courier, monospace;
+    overflow-y: auto; 
+  overflow-x: hidden;
+  border: 2px solid #333;       
+  border-radius: 12px;          
+  padding: 16px;
+}
+
+/* Таблица внутри #result */
+#result table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Заголовки таблицы */
+#result table th {
+  
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #000000;
+    top: 0;
+}
+
+/* Ячейки таблицы */
+#result table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000000;
+    vertical-align: middle;
+}
+#result-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000000;
+    vertical-align: middle;
+}
+
+
+/* table {
+    border-collapse: collapse;   
+    width: 100%;
+
+}
+
+th, td {
+    border: 1px solid #333;      
+    padding: 8px;                
+    text-align: center;          
+} */
+
+.x-btn.active {
+    background: #225e9a;
+    color: antiquewhite;
+}
+
+#error-box{
+  padding-left: 5vh;
+  padding-top: 1px;
+  padding-bottom: 1px;
+ 
+
+}
+
+#error-container{
+  color: red;
+  font-weight: bold;
+  display: block;
+  font-family: 'Courier New', Courier, monospace;
+  margin-left:21vh;
+  margin-top: 2vh;
+  height: 5vh;
+}
+.clear-container{
+
+  margin-left: 20vh;
+  line-height: 2;
+  padding-left: 10vh;
+  font-family: 'Courier New', Courier, monospace;      
+  padding: 16px;
+}

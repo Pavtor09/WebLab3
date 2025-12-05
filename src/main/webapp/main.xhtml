@@ -1,33 +1,206 @@
 <ui:composition template="resources/templates/template.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
     <ui:define name="title">Моя страница</ui:define>
 
     <ui:define name="head">
-        <!-- <h:outputStylesheet name="welcome.css" library="css"/>
-        <h:outputScript name="clock.js" library="js"/> -->
+        <h:outputStylesheet name="main.css" library="css"/>
+    </ui:define>
+
+    <ui:define name="scripts">
+        <h:outputScript name="graphics.js" library="js"/>
+        <h:panelGroup id="points-script">
+            <h:outputScript>
+                window.drawPointsFromBean = function(data)  {
+               
+                console.log("local script is running")
+                var selectedR = #{point.r};
+
+                
+                var points = [
+                <ui:repeat value="#{result.results}" var="item">
+                    {x: #{item.x}, y: #{item.y}, r: #{item.r}, hit: #{item.hit}},
+                </ui:repeat>
+                ];
+
+
+                drawFigure(selectedR);
+                // Рисуем точки для выбранного R
+                points.forEach(function(cur) {
+                if (cur.r === selectedR) {
+                drawDot(cur.x, cur.y, cur.hit);
+                }
+                });
+                };
+
+                window.onload = function()
+                {
+                    document.getElementById('main-form:load').click();
+                    drawPointsFromBean();
+                    
+                }
+            </h:outputScript>
+        </h:panelGroup>
+
     </ui:define>
 
     <ui:define name="content">
         <div class="container">
   <div class="left-column">
+
+    <h:form id = "main-form">
+
+        <h:commandButton id="load" style="display:none" action="#{manager.load()}" >
+            <f:ajax render="error-box result-table points-script" />
+        </h:commandButton>
+
+        <h:inputHidden id="clickX" value="#{point.x}"/>
+        <h:inputHidden id="clickY" value="#{point.y}"/>
+        <h:inputHidden id="setValidation" value="#{manager.doRangeValidation}"/>
+
+        <!-- Скрытая кнопка №1 - обработка клика по canvas -->
+        <h:commandButton id="canvasClickBtn" style="display: none;">
+            <f:ajax execute="clickX clickY setValidation"/>
+        </h:commandButton>
+
+        <!-- Скрытая кнопка №2 - проверка точки -->
+        <h:commandButton id="checkPointBtn" style="display: none;">
+            <f:ajax listener="#{manager.check(point.clickX, point.clickY, point.clickR)}"
+                    render="error-box points-script result-table"/>
+        </h:commandButton>
+        <div id="error-container">
+            <p:outputPanel id="error-box" autoUpdate="true">
+                <h:outputText value="Error: #{errorBean.message}" rendered="#{errorBean.show}"/>
+            </p:outputPanel>
+        </div>
+
     <!-- Интерфейс для ввода координат -->
-    <form>
-      <label for="x">X:</label><input id="x" name="x" type="number"/><br/>
-      <label for="y">Y:</label><input id="y" name="y" type="number"/><br/>
-      <button type="submit">Проверить</button>
-    </form>
+    <div id="inpt">
+        <!-- X: набор кнопок -->
+         <h:outputLabel value="Изменение X:"/>
+        <h:panelGroup layout="block" styleClass="x-buttons-row">
+            <h:commandButton value="-4" styleClass="x-btn">
+                <f:ajax execute="@this" render="error-box"
+                        listener="#{point.setX(-4)}" />
+            </h:commandButton>
+            <h:commandButton value="-3" styleClass="x-btn">
+                <f:ajax execute="@this" render="error-box"
+                        listener="#{point.setX(-3)}" />
+            </h:commandButton>
+            <h:commandButton value="-2" styleClass="x-btn">
+                <f:ajax execute="@this" render="error-box"
+                        listener="#{point.setX(-2)}" />
+            </h:commandButton>
+            <h:commandButton value="-1" styleClass="x-btn">
+                <f:ajax execute="@this" render="error-box"
+                        listener="#{point.setX(-1)}" />
+            </h:commandButton>
+            <h:commandButton value="0" styleClass="x-btn">
+                <f:ajax execute="@this" render="error-box"
+                        listener="#{point.setX(0)}" />
+            </h:commandButton>
+            <h:commandButton value="1" styleClass="x-btn">
+                <f:ajax execute="@this" render="error-box"
+                        listener="#{point.setX(1)}" />
+            </h:commandButton>
+            <h:commandButton value="2" styleClass="x-btn">
+                <f:ajax execute="@this" render="error-box"
+                        listener="#{point.setX(2)}" />
+            </h:commandButton>
+            <h:commandButton value="3" styleClass="x-btn">
+                <f:ajax execute="@this" render="error-box"
+                        listener="#{point.setX(3)}" />
+            </h:commandButton>
+            <h:commandButton value="4" styleClass="x-btn">
+                <f:ajax execute="@this" render="error-box"
+                        listener="#{point.setX(4)}" />
+            </h:commandButton>
+
+        </h:panelGroup>
+
+        <br/>
+
+        <!-- Y: текстовое поле -->
+        <h:outputLabel value="Изменение Y:"/>
+        <h:inputText id="y-input" value="#{point.y}" maxlength="5" placeholder="от -3 до 5">
+            <f:ajax event="change" execute="@this" render="error-box" />
+        </h:inputText>
+        <br/>
+
+        <!-- R: dropdown -->
+        <h:outputLabel value="Изменение R:"/>
+        <h:selectOneMenu id="r-select" value="#{point.r}">
+            <f:selectItem itemValue="1" itemLabel="1"/>
+            <f:selectItem itemValue="2" itemLabel="2"/>
+            <f:selectItem itemValue="3" itemLabel="3"/>
+            <f:selectItem itemValue="4" itemLabel="4"/>
+            <f:selectItem itemValue="5" itemLabel="5"/>
+            <f:ajax event="change" execute="@this" render="error-box points-script" onevent="drawDots"/>
+            <!-- event="change" - срабатывает сразу при выборе значения -->
+        </h:selectOneMenu>
+        <br/>
+
+        <h:commandButton id="send" value="Отправить">
+            <f:ajax execute="@this"
+                    listener="#{manager.check(point.x, point.y, point.r)}"
+                    render="error-box result-table points-script"
+                    onevent="drawDots"/>
+        </h:commandButton>
+      </div>
     <!-- Таблица с результатами -->
-    <table>
-      <tr><th>X</th><th>Y</th><th>Результат</th></tr>
-      <tr><td>1</td><td>2</td><td>Точка в области</td></tr>
-    </table>
-  </div>
+    <div id="result">
+      <!-- <table>
+        <tr><th>X</th><th>Y</th><th>Результат</th></tr>
+        <tr><td>1</td><td>2</td><td>Точка в области</td></tr>
+      </table> -->
+        <h:dataTable value="#{result.results}" var="item" id="result-table">
+
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                #{item.x}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Y</f:facet>
+                #{item.y}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">R</f:facet>
+                #{item.r}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Результат</f:facet>
+                <h:outputText value="#{item.stringHit}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Время запроса</f:facet>
+                #{item.currentTime}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Время выполнения</f:facet>
+                #{item.executionTime} мс
+            </h:column>
+        </h:dataTable>
+    </div>
+        <h:commandButton id="clear" value="Очистить" action="#{manager.clear()}" >
+            <f:ajax render="error-box result-table points-script" onevent="drawDots"/>
+        </h:commandButton>
+    </h:form>
+
+</div>
+
   <div class="right-column">
-    <!-- Место для графика (например, canvas или SVG) -->
-    <canvas id="chart"></canvas>
+    <canvas id='myCanvas' width="400" height="400"></canvas>
   </div>
 </div>
+
     </ui:define>
 </ui:composition>
+

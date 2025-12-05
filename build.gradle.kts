@@ -17,7 +17,7 @@ dependencies {
 
 
 
-
+    implementation("org.postgresql:postgresql:42.5.4")
     // https://mvnrepository.com/artifact/javax/javaee-api
     compileOnly("javax:javaee-api:8.0")
 //    implementation("org.icefaces:icefaces:4.3.0")
