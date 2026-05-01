@@ -16,7 +16,7 @@
             <h:outputScript>
                 window.drawPointsFromBean = function(data)  {
                
-                console.log("local script is running")
+                console.log("local scripвt is running")
                 var selectedR = #{point.r};
 
                 
@@ -66,7 +66,7 @@
         </h:commandButton>
 
         <h:commandButton id="checkPointBtn" style="display: none;">
-            <f:ajax listener="#{manager.check(point.clickX, point.clickY, point.clickR)}"
+            <f:ajax listener="#{manager.check(point)}"
                     render="error-box points-script result-table"/>
         </h:commandButton>
         <div id="error-container">

@@ -41,7 +41,7 @@ public class Service implements Serializable, ServiceInterface {
             if (valid) {
                 hit = checker.check(x, y, r);
                 LocalTime now = LocalTime.now();
-                ResultObject result = new ResultObject(x, y, r, hit, String.format("%02d:%02d", now.getHour(), now.getMinute()), (System.nanoTime() - startTime) / 1000000);
+                ResultObject result = new ResultObject(x, y, r, hit, String.format("%02d:%02d", now.getHour(), now.getMinute()), (System.nanoTime() - startTime) / 100000);
                 resultBean.add(result);
                 DbService.save(result);
 
